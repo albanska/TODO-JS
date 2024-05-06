@@ -1,21 +1,22 @@
 /*  general */
 
 #btn{
-    width: 60%;
+    width: 72.5%;
     padding-left: 5px;
     padding-right: 5px;
 }
 #todoCards{
-    margin-top: 5px;
-
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
-    border: 2px;
 }
-
 #todoCard{
-    margin-bottom: 10%;
-    padding-right: 5px;
+    margin-right: 20px;
+    padding: 20px;
+    display: flex;
+}
+.todoCard > *{
+    margin: 3px;
 }
 .delBtn{
     position: relative;
@@ -23,8 +24,8 @@
 
 .delBtn i{
     position: absolute;
-    margin-bottom: 7px;
-    margin-right: 5px;
+    margin-bottom: 9px;
+    margin-right: 8px;
     bottom: 0px;
     right: 0px;
 }
