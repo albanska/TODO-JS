@@ -1,35 +1,41 @@
+// Conts
 const addBtn = document.querySelector('#btn');
 const taskCard = document.querySelector(".todoCard");
-const tasksContainer= document.querySelector("#todoCards");
+const tasksContainer = document.querySelector("#todoCards");
 const delBtn = document.querySelector('.delBtn');
-const count = document.querySelectorAll('.todoCard').length; // Count all todoCards
 
-
-
-addBtn.addEventListener('click', addTask); //add a task on click
-delBtn.addEventListener('click',function(){//delete default task on click
-deleteTask(taskCard);  //target the right task
+// Events
+addBtn.addEventListener('click', addTask); // Add a task on click
+delBtn.addEventListener('click', function() { // Delete default task on click
+    deleteTask(taskCard);  // Target the right task
+});
+document.addEventListener('DOMContentLoaded', function() {
+    updateCount(); // Initialize count on page load
 });
 
-function deleteTask(task){
-    task.remove(); //remove the task
+// Delete
+function deleteTask(task) {
+    task.remove(); // Remove the task
+    updateCount(); // Update the counter after deleting a task
 }
 
-document.addEventListener('DOMContentLoaded', updateCount); // Initialize count on page load
-
-function addTask(){
-    const newTask = taskCard.cloneNode(true) // clone the task card
+// Add task 
+function addTask() {
+    const newTask = taskCard.cloneNode(true) // Clone the task card
     const newDelBtn = newTask.querySelector('.delBtn')
     const newTextArea = newTask.querySelector('.task')
 
-    newTextArea.value = 'New Task' // set new task text to "New Task"
-    newDelBtn.addEventListener('click', function(){ // add delete event listener to new task
-        deleteTask(newTask); //target the new task
-    })
+    newTextArea.value = 'New Task'; // Set new task text to "New Task"
+    newDelBtn.addEventListener('click', function() { // Add delete event listener to new task
+        deleteTask(newTask); // Target the new task
+    });
 
-    tasksContainer.appendChild(newTask) //append new task to the task container
+    tasksContainer.appendChild(newTask); // Append new task to the task container
+    updateCount(); // Update the counter after adding a task
 }
 
+// Count task
 function updateCount() {
-    document.getElementById('count').innerText = `Count: ${count}`; // Display the count
+    const count = document.querySelectorAll('.todoCard').length; // Count all todoCards
+    document.getElementById('count').innerText = `Count: ${count}`; // Display the updated count
 }
