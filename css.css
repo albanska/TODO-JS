@@ -1,23 +1,29 @@
 /*  general */
 
+#body{
+    width: 80%;
+}
+
 #btn{
     width: 72.5%;
     padding-left: 5px;
     padding-right: 5px;
 }
 #todoCards{
+   
     margin-top: 10px;
     display: flex;
     flex-direction: row;
+    
 }
 #todoCard{
     margin-right: 20px;
     padding: 20px;
     display: flex;
+    border: 20px;
+
 }
-.todoCard > *{
-    margin: 3px;
-}
+
 .delBtn{
     position: relative;
 }
