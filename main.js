@@ -2,6 +2,7 @@ const addBtn = document.querySelector('#btn');
 const taskCard = document.querySelector(".todoCard");
 const tasksContainer= document.querySelector("#todoCards");
 const delBtn = document.querySelector('.delBtn');
+const count = document.querySelectorAll('.todoCard').length; // Count all todoCards
 
 
 
@@ -14,10 +15,7 @@ function deleteTask(task){
     task.remove(); //remove the task
 }
 
-document.addEventListener('DOMContentLoaded', updateCount); 
-// Initialize count on page load
-// Update count every time a task is added or deleted
-// This function needs to be called inside addTask and deleteTask functions after modifying the DOM
+document.addEventListener('DOMContentLoaded', updateCount); // Initialize count on page load
 
 function addTask(){
     const newTask = taskCard.cloneNode(true) // clone the task card
@@ -33,7 +31,5 @@ function addTask(){
 }
 
 function updateCount() {
-    const count = document.querySelectorAll('.todoCard').length; // Count all todoCards
     document.getElementById('count').innerText = `Count: ${count}`; // Display the count
 }
-
