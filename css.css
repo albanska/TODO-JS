@@ -1,0 +1,30 @@
+/*  general */
+
+#btn{
+    width: 60%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+#todoCards{
+    margin-top: 5px;
+
+    display: flex;
+    flex-direction: row;
+    border: 2px;
+}
+
+#todoCard{
+    margin-bottom: 10%;
+    padding-right: 5px;
+}
+.delBtn{
+    position: relative;
+}
+
+.delBtn i{
+    position: absolute;
+    margin-bottom: 7px;
+    margin-right: 5px;
+    bottom: 0px;
+    right: 0px;
+}
