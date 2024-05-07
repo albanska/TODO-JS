@@ -17,13 +17,25 @@
     
 }
 #todoCard{
-    margin-right: 20px;
+    margin-right: 5px;
     padding: 20px;
     display: flex;
     border: 20px;
 
 }
+#todoCard {
+    margin: 0 10px 10px 0; /* Adds a margin of 10px between each card */
+    padding: 20px;
+    display: flex;
+    border: 20px;
+}
 
+
+
+.todoCard {
+    margin-right: 5px; 
+
+}
 .delBtn{
     position: relative;
 }
