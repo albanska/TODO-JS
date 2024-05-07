@@ -10,10 +10,10 @@ delBtn.addEventListener('click', function() { // Delete default task on click
     deleteTask(taskCard);  // Target the right task
 });
 document.addEventListener('DOMContentLoaded', function() {
-    updateCount(); // Initialize count on page load
+    updateCount(); // Count on page load
 });
 
-// Delete
+// Delete task
 function deleteTask(task) {
     task.remove(); // Remove the task
     updateCount(); // Update the counter after deleting a task
@@ -34,7 +34,7 @@ function addTask() {
     updateCount(); // Update the counter after adding a task
 }
 
-// Count task
+// Count the tasks
 function updateCount() {
     const count = document.querySelectorAll('.todoCard').length; // Count all todoCards
     document.getElementById('count').innerText = `Count: ${count}`; // Display the updated count
