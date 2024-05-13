@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     const addBtn = document.querySelector('#btn');
     const tasksContainer = document.querySelector("#todoCards");
+
     // Set up each task card for CKEditor and interactions
     function setupTaskCard(taskCard) {
         const textArea = taskCard.querySelector('.task');
         const delBtn = taskCard.querySelector('.delBtn');
         const saveBtn = taskCard.querySelector('.saveBtn');
-        // Initialize CKEditor on focus
+
+// Initialize CKEditor on focus
         textArea.addEventListener('focus', function() {
             if (!textArea.hasAttribute('data-ckeditor-initialized')) {
                 CKEDITOR.replace(textArea, {
@@ -18,10 +20,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }
                 });
-                textArea.setAttribute('data-ckeditor-initialized', 'true');
             }
         });
-        // Save changes from CKEditor back to the textarea
+
+        CKEDITOR.config.autoParagraph = false;
+
+// Save changes from CKEditor back to the textarea
         saveBtn.addEventListener('click', function() {
             console.log("Save button clicked for", textArea.id);
             const editor = CKEDITOR.instances[textArea.id];
@@ -32,18 +36,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 saveBtn.classList.remove('show'); // Hide save button after saving
             }
         });
-        // Delete task
-        delBtn.addEventListener('click', function() {
-            taskCard.remove();
-            updateCount();
+        
+// Delete task
+ delBtn.addEventListener('click', function() {
+       taskCard.remove();
+          updateCount();
         });
     }
-    // Function to add a new task card
+
+// Function to add a new task card
     function addTask() {
         const newTask = document.createElement('div');
         newTask.classList.add('todoCard');
         newTask.innerHTML = `
-            <textarea class="task" id="task-${Date.now()}" maxlength="200" cols="20" rows="15"></textarea>
+            <textarea class="task" id="task" maxlength="200" cols="20" rows="15">New task</textarea>
             <span class="delBtn"><i class="fa-solid fa-trash-can"></i></span>
             <button class="saveBtn">Save</button>
         `;
@@ -51,12 +57,14 @@ document.addEventListener('DOMContentLoaded', function() {
         setupTaskCard(newTask);
         updateCount();
     }
-    // Function to update the count of task cards
+
+// Function to update the count of task cards
     function updateCount() {
         const count = tasksContainer.children.length;
         document.getElementById('count').innerText = 'Count: ' + count;
     }
-    // Set up existing task cards on the page
+
+// Set up existing task cards on the page
     document.querySelectorAll('.todoCard').forEach(setupTaskCard);
     addBtn.addEventListener('click', addTask);
 });
