@@ -1,49 +1,92 @@
 /*  general */
+@media screen and (min-width: 100rem) {
+    .container {
+      margin: 1em 2em;
+    }
+  }
 
-#body{
-    width: 80%;
+  body {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+    margin: 0 auto; 
+    font-family: Arial, sans-serif; 
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+h1 {
+    text-align: center; 
+    color: whitesmoke;
+}
+
+#wrapper {
+    padding: 20px; 
 }
 
 #btn{
-    width: 72.5%;
-    padding-left: 5px;
-    padding-right: 5px;
+    width: 100%; 
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px; 
+    background: linear-gradient(rgb(140, 140, 221), 10%, pink);
 }
 #todoCards{
-   
     margin-top: 10px;
     display: flex;
     flex-direction: row;
-    
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+
 }
 #todoCard{
     margin-right: 5px;
     padding: 20px;
     display: flex;
-    border: 20px;
-
 }
 #todoCard {
     margin: 0 10px 10px 0; /* Adds a margin of 10px between each card */
     padding: 20px;
     display: flex;
-    border: 20px;
+    color: bisque;
 }
-
-
-
+textarea.task{
+    background: linear-gradient(rgb(140, 140, 221), 10%, pink);
+    box-shadow: 3px 1px 3px #000000;
+    border-radius: 3px;
+}
 .todoCard {
     margin-right: 5px; 
-
 }
 .delBtn{
     position: relative;
 }
-
 .delBtn i{
     position: absolute;
     margin-bottom: 9px;
     margin-right: 8px;
     bottom: 0px;
     right: 0px;
+}
+.saveBtn {
+    display: none; /* Hide by default */
+    margin-top: 10px; /* Space above the button */
+    padding: 5px 10px; /* Padding inside the button */
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.saveBtn.show {
+    display: block; /* Show when changes are made */
 }
