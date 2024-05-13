@@ -1,41 +1,62 @@
-// Conts
-const addBtn = document.querySelector('#btn');
-const taskCard = document.querySelector(".todoCard");
-const tasksContainer = document.querySelector("#todoCards");
-const delBtn = document.querySelector('.delBtn');
-
-// Events
-addBtn.addEventListener('click', addTask); // Add a task on click
-delBtn.addEventListener('click', function() { // Delete default task on click
-    deleteTask(taskCard);  // Target the right task
-});
 document.addEventListener('DOMContentLoaded', function() {
-    updateCount(); // Count on page load
+    const addBtn = document.querySelector('#btn');
+    const tasksContainer = document.querySelector("#todoCards");
+    // Set up each task card for CKEditor and interactions
+    function setupTaskCard(taskCard) {
+        const textArea = taskCard.querySelector('.task');
+        const delBtn = taskCard.querySelector('.delBtn');
+        const saveBtn = taskCard.querySelector('.saveBtn');
+        // Initialize CKEditor on focus
+        textArea.addEventListener('focus', function() {
+            if (!textArea.hasAttribute('data-ckeditor-initialized')) {
+                CKEDITOR.replace(textArea, {
+                    on: {
+                        instanceReady: function(ev) {
+                            ev.editor.on('change', function () {
+                                saveBtn.classList.add('show'); // Show save button on change
+                            });
+                        }
+                    }
+                });
+                textArea.setAttribute('data-ckeditor-initialized', 'true');
+            }
+        });
+        // Save changes from CKEditor back to the textarea
+        saveBtn.addEventListener('click', function() {
+            console.log("Save button clicked for", textArea.id);
+            const editor = CKEDITOR.instances[textArea.id];
+            if (editor) {
+                textArea.value = editor.getData(); // Update the textarea with data from CKEditor without the code
+                editor.destroy(); // Destroy the CKEditor immediatly
+                textArea.removeAttribute('data-ckeditor-initialized');
+                saveBtn.classList.remove('show'); // Hide save button after saving
+            }
+        });
+        // Delete task
+        delBtn.addEventListener('click', function() {
+            taskCard.remove();
+            updateCount();
+        });
+    }
+    // Function to add a new task card
+    function addTask() {
+        const newTask = document.createElement('div');
+        newTask.classList.add('todoCard');
+        newTask.innerHTML = `
+            <textarea class="task" id="task-${Date.now()}" maxlength="200" cols="20" rows="15"></textarea>
+            <span class="delBtn"><i class="fa-solid fa-trash-can"></i></span>
+            <button class="saveBtn">Save</button>
+        `;
+        tasksContainer.appendChild(newTask);
+        setupTaskCard(newTask);
+        updateCount();
+    }
+    // Function to update the count of task cards
+    function updateCount() {
+        const count = tasksContainer.children.length;
+        document.getElementById('count').innerText = 'Count: ' + count;
+    }
+    // Set up existing task cards on the page
+    document.querySelectorAll('.todoCard').forEach(setupTaskCard);
+    addBtn.addEventListener('click', addTask);
 });
-
-// Delete task
-function deleteTask(task) {
-    task.remove(); // Remove the task
-    updateCount(); // Update the counter after deleting a task
-}
-
-// Add task 
-function addTask() {
-    const newTask = taskCard.cloneNode(true) // Clone the task card
-    const newDelBtn = newTask.querySelector('.delBtn')
-    const newTextArea = newTask.querySelector('.task')
-
-    newTextArea.value = 'New Task'; // Set new task text to "New Task"
-    newDelBtn.addEventListener('click', function() { // Add delete event listener to new task
-        deleteTask(newTask); // Target the new task
-    });
-
-    tasksContainer.appendChild(newTask); // Append new task to the task container
-    updateCount(); // Update the counter after adding a task
-}
-
-// Count the tasks
-function updateCount() {
-    const count = document.querySelectorAll('.todoCard').length; // Count all todoCards
-    document.getElementById('count').innerText = `Count: ${count}`; // Display the updated count
-}
